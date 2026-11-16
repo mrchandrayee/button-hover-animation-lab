@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050817">
+<title>Button Hover Animation</title>
+<style>
+:root{--bg:#030615;--panel:#0d1522;--green:#22c55e;--cyan:#00ffff;--orange:#f59e0b}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 14px 45px;background:#020510;color:#eaf2ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1{text-align:center;color:#83b5ff;text-shadow:0 0 14px #318bff88;font-size:clamp(24px,4vw,34px);margin:0 0 24px}
+main{width:min(100%,720px);margin:auto;border:4px solid #f28a25;padding:12px;background:#030719}
+.card{margin-bottom:12px;background:#0b1421;border:1px solid #182337;border-radius:8px;overflow:hidden}
+.card:last-child{margin-bottom:0}
+.preview{height:150px;display:grid;place-items:center;background:#030719;position:relative}
+.demo-btn{position:relative;isolation:isolate;min-width:140px;height:48px;padding:0 22px;border:0;border-radius:4px;color:white;font-size:13px;font-weight:500;cursor:pointer;transition:all .35s ease;overflow:hidden}
+.label{position:absolute;top:10px;left:13px;font-size:9px;letter-spacing:1px;color:#65758e;text-transform:uppercase}
+.code{margin:0;padding:17px 16px;background:#0d1522;color:#42d99a;white-space:pre-wrap;overflow-x:auto;font:11px/1.65 "SFMono-Regular",Consolas,monospace;min-height:90px}
+.slide{background:transparent;border:1px solid #22c55e;color:#d9ffe7}
+.slide:before{content:"";position:absolute;top:0;left:0;width:0;height:100%;background:#22c55e;transition:.4s;z-index:-1}
+.slide:hover:before{width:100%}
+.slide:hover{color:#03131b}
+.border{background:transparent;color:#f59e0b}
+.border:before,.border:after{content:"";position:absolute;width:0;height:2px;background:#f59e0b;transition:.3s}
+.border:before{top:0;left:0}.border:after{bottom:0;right:0}
+.border:hover:before,.border:hover:after{width:100%}
+.shine{background:#1298df}
+.shine:after{content:"";position:absolute;top:0;left:-50%;width:25%;height:100%;background:rgba(255,255,255,.38);transform:skewX(-22deg);pointer-events:none}
+.shine:hover:after{animation:shine .8s}
+@keyframes shine{100%{left:150%}}
+.gradient{background:linear-gradient(90deg,#e23b9a,#9b42d2,#e23b9a);background-size:300% 100%}
+.gradient:hover{animation:gradientMove 2s linear infinite}
+@keyframes gradientMove{0%{background-position:0%}100%{background-position:300%}}
+.ripple{background:#10b981;box-shadow:0 0 0 0 rgba(16,185,129,.3)}
+.ripple:hover{box-shadow:0 0 0 10px rgba(16,185,129,.3)}
+.neon{background:#020510;color:#00ffff;border:2px solid #00ffff}
+.neon:hover{box-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff}
+.flip{background:#f45b0b;transform-style:preserve-3d}
+.flip:hover{transform:rotateX(360deg)}
+.glow{background:#2155e8;box-shadow:0 0 0 rgba(33,85,232,0)}
+.glow:hover{box-shadow:0 0 12px #2155e8,0 0 28px #2155e8,0 0 48px #2155e8;transform:translateY(-2px)}
+@media(max-width:480px){body{padding:18px 8px}main{padding:7px;border-width:3px}.preview{height:130px}.code{font-size:9px;padding:14px 11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<h1>Button Hover Animation</h1>
+<main>
+<section class="card">
+ <div class="preview"><span class="label">01 · Slide Fill</span><button class="demo-btn slide">Slide Fill</button></div>
+ <pre class="code">.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #22c55e;
+  transition: 0.4s;
+  z-index: -1;
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">02 · Border Draw</span><button class="demo-btn border">Border Draw</button></div>
+ <pre class="code">.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #f59e0b;
+  transition: .3s;
+}
+
+/* Hover expands the top and bottom borders */
+.btn:hover::before,
+.btn:hover::after {
+  width: 100%;
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">03 · Shine Sweep</span><button class="demo-btn shine">Shine Sweep</button></div>
+ <pre class="code">.btn:hover::after {
+  animation: shine .8s;
+}
+
+@keyframes shine {
+  100% { left: 150%; }
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">04 · Gradient Move</span><button class="demo-btn gradient">Gradient Move</button></div>
+ <pre class="code">.btn:hover {
+  animation: gradientMove 2s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">05 · Ripple Hover</span><button class="demo-btn ripple">Ripple Hover</button></div>
+ <pre class="code">.btn:hover {
+  box-shadow: 0 0 0 10px
+    rgba(16,185,129,0.3);
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">06 · Neon Border</span><button class="demo-btn neon">Neon Border</button></div>
+ <pre class="code">.btn:hover {
+  box-shadow:
+    0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 40px #0ff;
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">07 · Flip Button</span><button class="demo-btn flip">Flip Button</button></div>
+ <pre class="code">.btn:hover {
+  transform: rotateX(360deg);
+}</pre>
+</section>
+<section class="card">
+ <div class="preview"><span class="label">08 · Glow Button</span><button class="demo-btn glow">Glow Button</button></div>
+ <pre class="code">.btn:hover {
+  box-shadow:
+    0 0 12px #2155e8,
+    0 0 28px #2155e8,
+    0 0 48px #2155e8;
+}</pre>
+</section>
+</main>
+</body>
+</html>
